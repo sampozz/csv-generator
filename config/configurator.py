@@ -14,7 +14,8 @@ from modules.CustomJSONEncoder import CustomJSONEncoder
 
 column_types = '''What is the type of the column?
 [0] Number
-[1] Boolean    
+[1] Boolean
+[2] String
 '''
 
 class Configurator:
@@ -70,7 +71,7 @@ class Configurator:
             while col_name == '':
                 col_name = input('Insert the name of the column: ')
             col_type = input('\n' + column_types + 'Select the number: ')
-            while col_type == '' or not col_type.isdigit() or not col_type in ['0', '1']:
+            while col_type == '' or not col_type.isdigit() or not col_type in ['0', '1' , '2']:
                 col_type = input('\n' + column_types + 'Select the number: ')
 
             if col_type == '0':
@@ -110,6 +111,9 @@ Select the number: ''')
                 option_2 = input('What is the second option? ')
 
                 creating_columns[col_name] = Boolean(option_1, option_2)
+
+            elif col_type == '2':
+                pass
 
             add_new = input('Add a new column? [Y/n] ')
             while not add_new.upper() in ['Y', 'N', '']:
