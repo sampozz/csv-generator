@@ -2,12 +2,12 @@
 """Data Anonymizer - v0.1
 
 Usage:
-  anonymizer.py start <file_name> --use-config=<configuration_name> [-n=<rows_number>]
-  anonymizer.py config <configuration_name> 
-  anonymizer.py list
-  anonymizer.py export <configuration_name> <file_name>
-  anonymizer.py (-h | --help)
-  anonymizer.py --version
+  generator.py start <file_name> --use-config=<configuration_name> [-n=<rows_number>]
+  generator.py config <configuration_name> 
+  generator.py list
+  generator.py export <configuration_name> <file_name>
+  generator.py (-h | --help)
+  generator.py --version
 
 Options:
   -h --help     Show this screen.
@@ -21,7 +21,7 @@ Options:
 # Imports
 from docopt import docopt
 from config.Configurator import Configurator
-from modules.start import start_anonymizer
+from modules.start import start_generator
 import textwrap
 
 # Information
@@ -38,7 +38,7 @@ def main():
     #try:
     config = Configurator()
     if arguments['start']:
-        start_anonymizer(arguments['<file_name>'], config.configs[arguments['--use-config']])
+        start_generator(arguments['<file_name>'], config.configs[arguments['--use-config']])
     elif arguments['config']:
         config.create(arguments['<configuration_name>'])
     elif arguments['list']:

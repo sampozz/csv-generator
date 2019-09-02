@@ -1,6 +1,6 @@
 """Data Anonymizer configurator
 
-Documentation in anonimyzer.py
+Documentation in generator.py
 """
 
 # Imports

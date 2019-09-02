@@ -1,4 +1,4 @@
-def start_anonymizer(out_file_name, config, n=100):
+def start_generator(out_file_name, config, n=100):
 
     with open(out_file_name, 'w') as file:
 
