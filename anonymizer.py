@@ -20,7 +20,7 @@ Options:
 
 # Imports
 from docopt import docopt
-from config.configurator import *
+from config.Configurator import Configurator
 import textwrap
 
 # Information
@@ -34,19 +34,20 @@ __license__     = 'MIT License'
 def main():
     arguments = docopt(__doc__, version='Data Anonymizer - v0.1')
     
-    try:
-        if arguments['start']:
-            pass
-        elif arguments['config']:
-            pass
-        elif arguments['list']:
-            pass
-        elif arguments['export']:
-            pass
-    except Exception as e:
-        print("Fatal error! ", e)
-    finally:
-        print("Program terminated! Goodbye.\n")
+    #try:
+    config = Configurator()
+    if arguments['start']:
+        pass
+    elif arguments['config']:
+        config.create(arguments['<configuration_name>'])
+    elif arguments['list']:
+        config.print_configs()
+    elif arguments['export']:
+        pass
+    # except Exception as e:
+    #     print("Fatal error! ", e)
+    # finally:
+    #     print("Program terminated! Goodbye.\n")
 
 
 if __name__ == '__main__':
