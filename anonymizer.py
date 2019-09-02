@@ -21,6 +21,7 @@ Options:
 # Imports
 from docopt import docopt
 from config.Configurator import Configurator
+from modules.start import start_anonymizer
 import textwrap
 
 # Information
@@ -37,7 +38,7 @@ def main():
     #try:
     config = Configurator()
     if arguments['start']:
-        pass
+        start_anonymizer(arguments['<file_name>'], config.configs[arguments['--use-config']])
     elif arguments['config']:
         config.create(arguments['<configuration_name>'])
     elif arguments['list']:

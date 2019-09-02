@@ -98,7 +98,7 @@ Select the number: ''')
                 min_n = input('Select the minimum number [default: -9999]: ')
                 if min_n == '':
                     min_n = '-9999'
-                while not min_n.isdigit():
+                while not min_n.isdigit() and min_n != '-9999':
                     print('It has to be a number...')
                     min_n = input('Select the minimum number [default: -9999]: ')
 

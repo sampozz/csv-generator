@@ -10,6 +10,6 @@ class Boolean():
 
     
     def generate(self):
-        if int(random(0, 10)) % 2:
+        if int(1 + random() * 10) % 2:
             return self.option_1
-        return self.option_2
+        return str(self.option_2)
