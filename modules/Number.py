@@ -1,5 +1,5 @@
 # Imports
-from random import random
+from random import random, randint
 
 class Number:
 
@@ -13,7 +13,7 @@ class Number:
 
     
     def generate(self):
-        self.n = self.min_n + random() * self.max_n
-        if self.type_n == 'int' or (self.type_n == 'random' and int(1 + random() * 10) % 2):
-            self.n = int(self.n)
-        return str(self.n)
+        n = self.min_n + random() * self.max_n
+        if self.type_n == 'int' or (self.type_n == 'random' and randint(0, 10) % 2):
+            n = int(n)
+        return str(n)

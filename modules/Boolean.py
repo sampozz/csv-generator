@@ -1,5 +1,5 @@
 # Imports
-from random import random
+from random import randint
 
 class Boolean():
 
@@ -10,6 +10,6 @@ class Boolean():
 
     
     def generate(self):
-        if int(1 + random() * 10) % 2:
+        if randint(0, 10) % 2:
             return self.option_1
         return str(self.option_2)
