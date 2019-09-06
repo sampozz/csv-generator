@@ -38,7 +38,7 @@ def main():
     #try:
     config = Configurator()
     if arguments['start']:
-        start_generator(arguments['<file_name>'], config.configs[arguments['--use-config']])
+        start_generator(arguments['<file_name>'], config.use_config(arguments['--use-config']))
     elif arguments['config']:
         config.create(arguments['<configuration_name>'])
     elif arguments['list']:

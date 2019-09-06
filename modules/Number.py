@@ -13,7 +13,7 @@ class Number:
 
     
     def generate(self):
-        n = self.min_n + random() * self.max_n
+        n = randint(self.min_n, self.max_n) + random() 
         if self.type_n == 'int' or (self.type_n == 'random' and randint(0, 10) % 2):
             n = int(n)
         return str(n)
