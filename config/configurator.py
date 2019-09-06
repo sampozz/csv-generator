@@ -98,10 +98,10 @@ class Configurator:
             while col_name == '':
                 col_name = input('Insert the name of the column: ')
             col_type = input('\n' + column_types + 'Select the number: ')
-            while col_type == '' or not col_type.isdigit() or not col_type in ['0', '1' , '2']:
+            while col_type == '' or not col_type.isdigit() or not col_type in ['0', '1', '2']:
                 col_type = input('\n' + column_types + 'Select the number: ')
 
-            # Import values from file
+            # Column type: import from file
             print('\nChoose the file from which the generator will get the values of the column randomly')
             if col_type == '0':
                 file_name = input('Insert the file name: ')

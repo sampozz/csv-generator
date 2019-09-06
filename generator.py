@@ -2,7 +2,7 @@
 """Data Anonymizer - v0.1
 
 Usage:
-  generator.py start <file_name> --use-config=<configuration_name> [-n=<rows_number>]
+  generator.py start <file_name> -c=<configuration_name> [-n=<rows_number>]
   generator.py config <configuration_name> 
   generator.py list
   generator.py export <configuration_name> <file_name>
@@ -12,9 +12,9 @@ Usage:
 Options:
   -h --help     Show this screen.
   --version     Show version.
-  --use-config=configuration_name
+  -c = configuration_name
                 Specify the configuration to use
-  -n=rows_number
+  -n = rows_number
                 Specify the number of rows to write [default: 100]
 """
 
@@ -35,20 +35,21 @@ __license__     = 'MIT License'
 def main():
     arguments = docopt(__doc__, version='Data Anonymizer - v0.1')
     
-    #try:
-    config = Configurator()
-    if arguments['start']:
-        start_generator(arguments['<file_name>'], config.use_config(arguments['--use-config']))
-    elif arguments['config']:
-        config.create(arguments['<configuration_name>'])
-    elif arguments['list']:
-        config.print_configs()
-    elif arguments['export']:
-        pass
-    # except Exception as e:
-    #     print("Fatal error! ", e)
-    # finally:
-    #     print("Program terminated! Goodbye.\n")
+    try:
+        config = Configurator()
+        if arguments['start']:
+            start_generator(arguments['<file_name>'], config.use_config(arguments['-c']), arguments['-n'])
+            print('Process successfully completed! "' + arguments['<file_name>'] + '" has been created.')
+        elif arguments['config']:
+            config.create(arguments['<configuration_name>'])
+        elif arguments['list']:
+            config.print_configs()
+        elif arguments['export']:
+            pass
+    except Exception as e:
+        print("Fatal error! ", e.with_traceback())
+    finally:
+        print("Program terminated.")
 
 
 if __name__ == '__main__':
