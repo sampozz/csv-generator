@@ -47,7 +47,7 @@ def main():
         elif arguments['export']:
             pass
     except Exception as e:
-        print("Fatal error! ", e.with_traceback())
+        print("Fatal error! " + str(e))
     finally:
         print("Program terminated.")
 
