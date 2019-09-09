@@ -41,7 +41,7 @@ def main():
             start_generator(arguments['<file_name>'], config.use_config(arguments['-c']), arguments['-n'])
             print('Process successfully completed! "' + arguments['<file_name>'] + '" has been created.')
         elif arguments['config']:
-            config.create(arguments['<configuration_name>'])
+            config.create_configuration(arguments['<configuration_name>'])
         elif arguments['list']:
             config.print_configs()
         elif arguments['export']:
