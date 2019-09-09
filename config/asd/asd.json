@@ -1,8 +1,0 @@
-{
-    "a": {
-        "type": "Number",
-        "type_n": "integer",
-        "max_n": 9999.0,
-        "min_n": -9999.0
-    }
-}
