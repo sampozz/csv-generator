@@ -35,21 +35,21 @@ __license__     = 'MIT License'
 def main():
     arguments = docopt(__doc__, version='Data Anonymizer - v0.1')
     
-    try:
-        config = Configurator()
-        if arguments['start']:
-            start_generator(arguments['<file_name>'], config.use_config(arguments['-c']), arguments['-n'])
-            print('Process successfully completed! "' + arguments['<file_name>'] + '" has been created.')
-        elif arguments['config']:
-            config.create_configuration(arguments['<configuration_name>'])
-        elif arguments['list']:
-            config.print_configs()
-        elif arguments['export']:
-            pass
-    except Exception as e:
-        print("Fatal error! " + str(e))
-    finally:
-        print("Program terminated.")
+    #try:
+    config = Configurator()
+    if arguments['start']:
+        start_generator(arguments['<file_name>'], config.use_config(arguments['-c']), arguments['-n'])
+        print('Process successfully completed! "' + arguments['<file_name>'] + '" has been created.')
+    elif arguments['config']:
+        config.create_configuration(arguments['<configuration_name>'])
+    elif arguments['list']:
+        config.print_configs()
+    elif arguments['export']:
+        pass
+    # except Exception as e:
+    #     print("Fatal error! " + e)
+    # finally:
+    #     print("Program terminated.")
 
 
 if __name__ == '__main__':

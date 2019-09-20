@@ -13,3 +13,9 @@ class Boolean():
         if randint(0, 10) % 2:
             return self.option_1
         return str(self.option_2)
+    
+
+    def config(self):
+        print('\n' + 'Select the 2 options of the column (eg. [1, 0] - [True, False] - [Male, Female])')
+        self.option_1 = input('What is the first option? ')
+        self.option_2 = input('What is the second option? ')

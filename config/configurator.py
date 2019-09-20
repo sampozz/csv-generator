@@ -124,6 +124,7 @@ class Configurator:
         # Creating new configuration 
         creating_columns = {}
         print('\nCreating new configuration: ' + config_name)
+        mkdir(getcwd() + '/config/' + config_name)  
 
         while True:
             add_new = input('\nAdd a new column? [Y/n] ')
@@ -138,10 +139,9 @@ class Configurator:
 
         if len(creating_columns) == 0:
             print('No column has been created. Cannot save the configuration')
+            rmtree(getcwd() + '/config/' + config_name)
             return
-
-        # Creating configuration
-        mkdir(getcwd() + '/config/' + config_name)            
+          
         dump(creating_columns, open(getcwd() + '/config/' + config_name + '/' + config_name + '.json', 'w'), cls=CustomJSONEncoder, indent=4)
         print('Configuration successfully created!')
         return
@@ -165,137 +165,20 @@ class Configurator:
             ret = None
             # Column type: import from file
             if col_type == '1':
-                ret = self.__file_conf(config_name)                 
+                ret = File()
+                ret.config(config_name)      
             # Column type: number
             elif col_type == '2':        
-                ret = self.__number_conf()          
+                ret = Number()
+                ret.config()      
             # Column type: boolean
             elif col_type == '3':
-                ret = self.__boolean_conf()        
+                ret = Boolean()
+                ret.config()     
             # Column type: string
             elif col_type == '4':
-                ret = self.__string_conf()
+                ret = String()
+                ret.config()
         except Exception as e:
             print('Error occured:', e)
         return col_name, ret  
-
-    
-    def __file_conf(self, config_name, current=None):
-        if current == None:
-            print('\nChoose the file from which the generator will get the values of the column randomly')
-            file_name = input('Insert the file name: ')
-            while not path.isfile(file_name):
-                print('Cannot find the file "' + file_name + '"')
-                file_name = input('Insert the file name: ')
-            file_del = ','
-            ignore_nl = 'true'
-        else:
-            file_name = path.basename(current.file_name)
-            file_del = current.file_del
-            ignore_nl = current.ignore_nl
-        while True:
-            print('\nEdit the configuration of the column (type: Import from file):')
-            print('''
-[1] File name: ''' + file_name + '''
-[2] Value delimiter: ''' + file_del + '''
-[3] Ignore new line char (\\n): ''' + ignore_nl + '''
-[0] Save column configuration and exit''')
-            selection = input('Select an option: ')
-            while selection == '' or not selection.isdigit():
-                selection = input('Select an option: ')
-            if selection == '0':
-                break
-            elif selection == '1':
-                file_name = input('Insert the file name: ')
-                while not path.isfile(file_name):
-                    print('Cannot find the file "' + file_name + '"')
-                    file_name = input('Insert the file name: ')
-            elif selection == '2':
-                file_del = input('\nSelect the value delimiter: ')
-            elif selection == '3':
-                selection = input('\nIgnore new line? [Y/n]: ')
-                while not selection.lower() in ['y', 'n', '']:
-                    selection = input('\nIgnore new line? [Y/n]: ')
-                if selection.lower() == 'n':
-                    ignore_nl = 'false'
-                else:
-                    ignore_nl = 'true'
-        copyfile(file_name, getcwd() + '/config/' + config_name + '/' + path.basename(file_name))
-        return File(config_name + '/' + path.basename(file_name), file_del, ignore_nl)
-
-
-    def __number_conf(self, current=None):
-        if current == None:
-            num_type = 'integer'
-            max_n = '9999'
-            min_n = '-9999'
-        else:
-            num_type = current.num_type
-            max_n = current.max_n
-            min_n = current.min_n
-        while True:
-            print('\nEdit the configuration of the column (type: Number):')
-            print('''
-[1] Number type: ''' + num_type + '''
-[2] Maximum number: ''' + max_n + '''
-[3] Minimum number: ''' + min_n + '''
-[0] Save column configuration and exit''')
-            selection = input('Select an option: ')
-            while selection == '' or not selection.isdigit():
-                selection = input('Select an option: ')
-            if selection == '0':
-                break
-            elif selection == '1':
-                selection = input('\nSelect a type [integer, float, random]: ')
-                while not selection in ['integer', 'float', 'random']:
-                    selection = input('Select a type [integer, float, random]: ')
-                num_type = selection
-            elif selection == '2':
-                selection = input('\nSelect the maximum number: ')
-                while not selection.replace('-', '').replace('.', '').isdigit():
-                    selection = input('\nSelect the maximum number: ')
-                max_n = selection
-            elif selection == '3':
-                selection = input('\nSelect the minimum number: ')
-                while not selection.replace('-', '').replace('.', '').isdigit():
-                    selection = input('\nSelect the minimum number: ')
-                min_n = selection
-        return Number(num_type, float(max_n), float(min_n))
-
-
-    def __boolean_conf(self):
-        print('\n' + 'Select the 2 options of the column (eg. [1, 0] - [True, False] - [Male, Female])')
-        option_1 = input('What is the first option? ')
-        option_2 = input('What is the second option? ')
-        return Boolean(option_1, option_2)
-
-    
-    def __string_conf(self, current=None):
-        if current == None:
-            max_length = '10'
-            min_length = '0'
-        else:
-            max_length = current.max_length
-            min_length = current.min_length
-        while True:
-            print('\nEdit the configuration of the column (type: String):')
-            print('''
-[1] Maximum length: ''' + max_length + '''
-[2] Minimum length: ''' + min_length + '''
-[0] Save column configuration and exit''')
-            selection = input('Select an option: ')
-            while selection == '' or not selection.isdigit():
-                selection = input('Select an option: ')
-            if selection == '0':
-                break
-            elif selection == '1':
-                selection = input('\nSelect the maximum length: ')
-                while not selection.isdigit():
-                    selection = input('\nSelect the maximum length: ')
-                max_length = selection
-            elif selection == '2':
-                selection = input('\nSelect the minimum length: ')
-                while not selection.isdigit():
-                    selection = input('\nSelect the minimum length: ')
-                min_length = selection
-        return String(int(max_length), int(min_length))
