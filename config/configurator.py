@@ -72,15 +72,15 @@ class Configurator:
 
 
     def __edit(self, config_name, config):
-        print('\nAvailable columns:')
-        for col in config.keys():
-            print(' - ' + col + ', type: ' + config[col].type)
         cmd = ''
         while cmd == '' or not 'exit' in cmd.lower():
+            print('\nAvailable columns:')
+            for col in config.keys():
+                print(' - ' + col + ', type: ' + config[col].type)
             print('''\nType:
     edit <column-name>  # To edit the selected column
     new                 # To create a new column
-    del <column-name>    # To delete the selected column
+    del <column-name>   # To delete the selected column
     exit                # To save the configuration and exit''')
             cmd = input('> ')
             if 'edit' in cmd.lower():
@@ -90,7 +90,14 @@ class Configurator:
                 if col != None:
                     config[col_name] = col
             elif 'del' in cmd.lower():
-                pass
+                if not cmd.split(' ')[1] in config.keys():
+                    continue
+                print('Deleting column...')
+                del config[cmd.split(' ')[1]]
+                if len(config) == 0:
+                    print('No more columns in this configuration. Deleting...')
+                    rmtree(getcwd() + '/config/' + config_name)
+                    return
             elif 'exit' in cmd.lower():
                 break
             else:
