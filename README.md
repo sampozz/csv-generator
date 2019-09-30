@@ -6,7 +6,8 @@ The *Data generator* helps you by creating all the data you need as you need it.
 
 ## Requirements
 - Python 3.x
-- Docopt library (pip install docopt)
+- docopt library (pip install docopt)   https://github.com/docopt/docopt
+- exrex library (pip install exrex)     https://github.com/asciimoo/exrex
 
 ## Instructions
 1 - Create the configuration of the data with `python generator.py config 'configuration-name'` and follow the guided process\

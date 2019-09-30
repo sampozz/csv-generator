@@ -65,7 +65,7 @@ class Configurator:
             elif v['type'] == 'Boolean':
                 columns[k] = Boolean(v['option_1'], v['option_2'])
             elif v['type'] == 'String':
-                columns[k] = String(v['max_length'], v['min_length'])
+                columns[k] = String(v['max_length'], v['min_length'], v['regex'])
             else:
                 raise Exception('Could not import configuration')
         return columns
