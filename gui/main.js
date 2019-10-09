@@ -1,7 +1,11 @@
-const { app, BrowserWindow } = require('electron');
+const electron = require('electron');
+const app = electron.app;
+const BrowserWindow = electron.BrowserWindow;
+const url = require('url');
+const path = require('path');
 const fs = require('fs');
 
-let win; 
+let win;
 let configs = {};
 
 // Read configurations and push to configs
@@ -11,6 +15,12 @@ fs.readdirSync('../config/').forEach(dir => {
     configs[dir] = (JSON.parse(raw));
   }
 });
+// Write configs to configs.json file
+fs.writeFile(path.join(__dirname, 'assets/configs.json'), JSON.stringify(configs), (err) => {
+  if (err) {
+    console.log(err);
+  }
+}); 
 
 // Configure window
 app.on('ready', () => {
@@ -23,7 +33,11 @@ app.on('ready', () => {
       nodeIntegration: true
     }
   });
-  win.loadFile('index.html');
+  win.loadURL(url.format({
+    pathname: path.join(__dirname, 'index.html'),
+    protocol: 'file',
+    slashes: true,
+  }));
   win.on('closed', () => {
     win = null;
   });
@@ -38,6 +52,3 @@ app.on('activate', () => {
     createWindow();
   }
 });
-
-let body = document.getElementsByTagName('body');
-console.log(body);

@@ -1,0 +1,24 @@
+<nav class="navbar navbar-light bg-primary">
+    <a class="navbar-brand" href="#" style="color: white">
+        <!-- <img src="/docs/4.3/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt=""> -->
+        Graphic configurator
+    </a>
+    <button class="btn btn-primary my-2 my-sm-0" style="border-color: white;" type="submit">Add</button>
+</nav>
+
+<div class="container">
+    <h4 class="title">Select a configuration:</h4>
+    <div class="row">
+        <div class="card col-4 mx-2" *ngFor="let conf of configs | keyvalue">
+            <div class="card-body">
+                <h4 class="card-title">{{ conf.key }}</h4>  
+            </div>
+            <ul class="list-group list-group-flush" *ngFor="let col of conf.value | keyvalue">
+                <li class="list-group-item">{{ col.key }}: {{ col.value.type }}</li>
+            </ul>
+            <div class="card-body">
+                <a href="#" class="btn btn-primary">Modify configuration</a>
+            </div>
+        </div>
+    </div>
+</div>
