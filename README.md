@@ -1,8 +1,8 @@
-# Data Generator - v0.1
+# CSV Generator - v0.1
 
 The purpose of this program is to create CSV files with all the data you need for development and testing.\
 According with the GDPR, during the development process, personal information or sensitive data cannot be used. Therefore you should anonymize with fake information all the data before starting any activity that includes the use of it. \
-The *Data generator* helps you by creating all the data you need as you need it.
+The *CSV generator* helps you by creating all the data you need as you need it.
 
 ## Requirements
 - Python 3.x
