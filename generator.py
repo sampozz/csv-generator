@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Data Anonymizer - v0.1
+"""CSV Generator - v0.1
 
 Usage:
   generator.py start <file_name> -c=<configuration_name> [-n=<rows_number>]
